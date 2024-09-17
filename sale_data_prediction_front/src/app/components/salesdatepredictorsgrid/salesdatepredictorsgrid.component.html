@@ -1,0 +1,73 @@
+<div class="container">
+    
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Last Order Date</th>
+            <th scope="col">Next Preducted Order</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (customer of salesService.list; track customer.id) {
+            <tr>
+              <th scope="row">{{customer.customerName}}</th>
+              <td>{{customer.lastOrderdate}}</td>
+              <td>{{customer.nextPredictedOrder}}</td>
+              <td><button type="button" class="btn" (click)="openModal(customer.id, customer.customerName)">VIEW ORDERS</button></td>
+              <td><button class="btn" data-bs-toogle="modal" data-bs-target="#exampleModal2">NEW ORDER</button></td>
+            </tr>
+          }
+          
+        </tbody>
+      </table>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{salesService.customerName}}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Request Date</th>
+                    <th scope="col">Shipper Date</th>
+                    <th scope="col">Ship Name</th>
+                    <th scope="col">Ship Address</th>
+                    <th scope="col">Ship City</th>
+                  </tr>
+                </thead>
+                @for (order of salesService.ordersCust; track order.orderId) {
+                  <tr>
+                    <th scope="row">{{order.orderId}}</th>
+                    <td>{{order.requireddate}}</td>
+                    <td>{{order.shippeddate}}</td>
+                    <td>{{order.shipName}}</td>
+                    <td>{{order.shipaddress}}</td>
+                    <td>{{order.shipcity}}</td>
+                  </tr>
+                }
+              </table>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary">Guardar cambios</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+    
+</div>
+
+
+
