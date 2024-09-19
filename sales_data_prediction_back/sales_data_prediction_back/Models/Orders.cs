@@ -35,6 +35,11 @@ namespace sales_data_prediction_back.Models
     {
         public int id { set; get; }
         public string CustomerName { set; get; }
+        public string CustomerAddress { set; get; }
+        public string CustomerCity { set; get; }
+        public string CustomerCountry { set; get; }
+        public string CustomerZipCode { set; get; }
+        public string CustomerRegion { set; get; }
         public DateTime LastOrderdate { get; set; }
         public DateTime NextPredictedOrder { get; set; }
 
@@ -42,10 +47,17 @@ namespace sales_data_prediction_back.Models
 
     public class createOrder
     {
-        public Customers Customers { get; set; }
-        public Employees Employees { get; set; }
-
-    }
+        public getSalesPrediction Customer { get; set; }
+        public getEmployees Employee { get; set; }
+        public Products Product { set; get; }
+        public Shippers Shipper { set; get; }
+        public DateTime OrderDate { set; get; }
+        public DateTime RequireDate { set; get; }
+        public DateTime ShippedDate { set; get; }
+        public decimal Freight { set; get; }
+		public short Qty { get; set; }
+		public decimal Discount { get; set; }
+	}
 
     public class CreatedOrderResponseType
     {

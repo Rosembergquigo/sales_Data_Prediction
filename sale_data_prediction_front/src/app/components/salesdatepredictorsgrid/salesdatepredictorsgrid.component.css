@@ -2,3 +2,14 @@
     color: white;
     background-color: indianred;
 }
+
+.view{
+    color: red;
+}
+
+.new { color: green}
+
+#newOrdModal .modal-header{
+    color: white;
+    background-color: darkseagreen;
+}

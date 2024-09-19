@@ -29,6 +29,11 @@ namespace sales_data_prediction_back.Services
 					{
 						id = Convert.ToInt32(dr["custid"]),
 						CustomerName = dr["CustomerName"].ToString(),
+						CustomerAddress = dr["address"].ToString(),
+						CustomerCity = dr["city"].ToString(),
+						CustomerCountry = dr["country"].ToString(),
+						CustomerZipCode = dr["postalcode"].ToString(),
+						CustomerRegion= !string.IsNullOrEmpty(dr["region"].ToString()) ? dr["region"].ToString() : string.Empty,
 						LastOrderdate = !string.IsNullOrEmpty(dr["LastOrderDate"].ToString()) ? Convert.ToDateTime(dr["LastOrderDate"]) : DateTime.Now,
 						NextPredictedOrder = !string.IsNullOrEmpty(dr["NextPredictedOrder"].ToString()) ? Convert.ToDateTime(dr["NextPredictedOrder"]) : DateTime.Now,
 					});

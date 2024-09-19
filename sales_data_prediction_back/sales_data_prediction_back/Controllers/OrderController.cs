@@ -14,6 +14,7 @@ namespace sales_data_prediction_back.Controllers
 		public OrderController(OrderService orderService)
 		{
 			this.orderService = orderService;
+
 		}
 
 		[HttpGet]
@@ -28,7 +29,7 @@ namespace sales_data_prediction_back.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult CreateOrder(createOrder request)
+		public IActionResult CreateOrder([FromBody]createOrder request)
 		{
 			CreatedOrderResponseType result = orderService.CreatedOrder(request);
 

@@ -56,3 +56,4 @@ C:\Dev\.net\sales_Data_Prediction\sales_data_prediction_back\sales_data_predicti
 C:\Dev\.net\sales_Data_Prediction\sales_data_prediction_back\sales_data_prediction_back\obj\Debug\netcoreapp3.1\sales_data_prediction_back.dll
 C:\Dev\.net\sales_Data_Prediction\sales_data_prediction_back\sales_data_prediction_back\obj\Debug\netcoreapp3.1\sales_data_prediction_back.pdb
 C:\Dev\.net\sales_Data_Prediction\sales_data_prediction_back\sales_data_prediction_back\obj\Debug\netcoreapp3.1\sales_data_prediction_back.genruntimeconfig.cache
+C:\Dev\.net\sales_Data_Prediction\sales_data_prediction_back\sales_data_prediction_back\obj\Debug\netcoreapp3.1\sales_data_prediction_back.sourcelink.json
