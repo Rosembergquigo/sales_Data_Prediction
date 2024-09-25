@@ -32,7 +32,6 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">{{salesService.customerName}}</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <table class="table">
@@ -62,7 +61,7 @@
               
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn view" data-bs-dismiss="modal">Cerrar</button>
             </div>
           </div>
         </div>
@@ -73,13 +72,126 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">{{salesService.customerName}} - New Order</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-             <app-modal></app-modal> 
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <form [formGroup]="newOrderForm" (ngSubmit)="onSubmit()" class="row g-3" >
+                <h5>Order</h5>
+                <div class="col-md-6">
+                    <select id="trabajador" class="form-select" formControlName="trabajador">
+                        <option disabled selected>Seleccione Trabajador*</option>
+                        @for (employee of salesService.listEmployees; track employee.empid) {
+                            <option value="{{employee.empid}}">{{employee.fullName}}</option>
+                        }
+                    </select>
+                    <div *ngIf="newOrderForm.get('trabajador')?.invalid && newOrderForm.get('trabajador')?.touched">
+                      <small *ngIf="newOrderForm.get('trabajador')?.hasError('required')">Debes seleccionar una opción</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <select id="transportador" class="form-select" formControlName="transportador">
+                        <option disabled selected>Seleccione Transportador*</option>
+                        @for (shipper of salesService.listShippers; track shipper.shipperid) {
+                            <option value="{{shipper.shipperid}}">{{shipper.companyname}}</option>
+                        }
+                    </select>
+                    <div *ngIf="newOrderForm.get('transportador')?.invalid && newOrderForm.get('transportador')?.touched">
+                      <small *ngIf="newOrderForm.get('transportador')?.hasError('required')">Debes seleccionar una opción</small>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" id="nombre" placeholder="Nombre entrega *" formControlName="nombre">
+                    <div *ngIf="newOrderForm.get('nombre')?.invalid && newOrderForm.get('nombre')?.touched">
+                      <small *ngIf="newOrderForm.get('nombre')?.hasError('required')">Este campo es obligatorio</small>
+                      <small *ngIf="newOrderForm.get('nombre')?.hasError('pattern')">Solo se permiten caracteres entre Aa-Zz</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="direccion" placeholder="Dirección Entrega *" formControlName="direccion">
+                    <div *ngIf="newOrderForm.get('direccion')?.invalid && newOrderForm.get('direccion')?.touched">
+                      <small *ngIf="newOrderForm.get('direccion')?.hasError('required')">Este campo es obligatorio</small>
+                      <small *ngIf="newOrderForm.get('direccion')?.hasError('pattern')">Solo se permiten caracteres alfanuméricos</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="ciudad" placeholder="Ciudad Entrega *" formControlName="ciudad">
+                    <div *ngIf="newOrderForm.get('ciudad')?.invalid && newOrderForm.get('ciudad')?.touched">
+                      <small *ngIf="newOrderForm.get('ciudad')?.hasError('required')">Este campo es obligatorio</small>
+                      <small *ngIf="newOrderForm.get('ciudad')?.hasError('pattern')">Solo se permiten caracteres entre Aa-Zz</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="pais" placeholder="Pais de Entrega *" formControlName="pais">
+                    <div *ngIf="newOrderForm.get('pais')?.invalid && newOrderForm.get('pais')?.touched">
+                      <small *ngIf="newOrderForm.get('pais')?.hasError('required')">Este campo es obligatorio</small>
+                      <small *ngIf="newOrderForm.get('pais')?.hasError('pattern')">Solo se permiten caracteres entre A-Z</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="date" class="form-control" id="fechaOrden" placeholder="Fecha de la orden *" formControlName="fechaOrden">
+                    <div *ngIf="newOrderForm.get('fechaOrden')?.invalid && newOrderForm.get('fechaOrden')?.touched">
+                      <small *ngIf="newOrderForm.get('fechaOrden')?.hasError('required')">Este campo es obligatorio</small>
+                      <small *ngIf="newOrderForm.get('fechaOrden')?.hasError('pattern')">Solo se permiten caracteres entre alfanumericos</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="date" class="form-control" id="fechaReq" placeholder="Fecha de Requerimiento *" formControlName="fechaReq">
+                    <div *ngIf="newOrderForm.get('fechaReq')?.invalid && newOrderForm.get('fechaReq')?.touched">
+                      <small *ngIf="newOrderForm.get('fechaReq')?.hasError('required')">Este campo es obligatorio</small>
+                      <small *ngIf="newOrderForm.get('fechaReq')?.hasError('pattern')">Solo se permiten caracteres entre alfanumericos</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="date" class="form-control" id="fechaEntre" placeholder="Fecha de entrega *" formControlName="fechaEntre">
+                    <div *ngIf="newOrderForm.get('fechaEntre')?.invalid && newOrderForm.get('fechaEntre')?.touched">
+                      <small *ngIf="newOrderForm.get('fechaEntre')?.hasError('required')">Este campo es obligatorio</small>
+                      <small *ngIf="newOrderForm.get('fechaEntre')?.hasError('pattern')">Solo se permiten caracteres entre alfanumericos</small>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" id="valorTotal" placeholder="Valor Total *" formControlName="valorTotal">
+                    <div *ngIf="newOrderForm.get('valorTotal')?.invalid && newOrderForm.get('valorTotal')?.touched">
+                      <small *ngIf="newOrderForm.get('valorTotal')?.hasError('required')">Este campo es obligatorio</small>
+                      <small *ngIf="newOrderForm.get('valorTotal')?.hasError('pattern')">Solo se permiten caracteres numericos</small>
+                    </div>
+                </div>
+                <h5>Order Details</h5>
+                <div class="col-md-12">
+                    <select id="producto" class="form-select" formControlName="producto">
+                        <option selected>Seleccione Producto *</option>
+                        @for (product of salesService.listProduct; track product.productid) {
+                            <option value="{{product.productid}}">{{product.productname}}</option>
+                        }
+                    </select>
+                    <div *ngIf="newOrderForm.get('producto')?.invalid && newOrderForm.get('producto')?.touched">
+                      <small *ngIf="newOrderForm.get('producto')?.hasError('required')">Debes seleccionar una opción</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="precioUnit" placeholder="Precio Unitario *" value="" formControlName="precioUnit">
+                    <div *ngIf="newOrderForm.get('precioUnit')?.invalid && newOrderForm.get('precioUnit')?.touched">
+                      <small *ngIf="newOrderForm.get('precioUnit')?.hasError('required')">Este campo es obligatorio</small>
+                      <small *ngIf="newOrderForm.get('precioUnit')?.hasError('pattern')">Solo se permiten caracteres numericos</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="cantidad" placeholder="Cantidad *" formControlName="cantidad">
+                    <div *ngIf="newOrderForm.get('cantidad')?.invalid && newOrderForm.get('cantidad')?.touched">
+                      <small *ngIf="newOrderForm.get('cantidad')?.hasError('required')">Este campo es obligatorio</small>
+                      <small *ngIf="newOrderForm.get('cantidad')?.hasError('pattern')">Solo se permiten caracteres numericos</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="descuento" placeholder="Descuento *" formControlName="descuento">
+                    <div *ngIf="newOrderForm.get('descuento')?.invalid && newOrderForm.get('descuento')?.touched">
+                      <small *ngIf="newOrderForm.get('descuento')?.hasError('required')">Este campo es obligatorio</small>
+                      <small *ngIf="newOrderForm.get('descuento')?.hasError('pattern')">Solo se permiten caracteres numericos</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn close" data-bs-dismiss="modal">Cerrar</button>
+                  <button type="submit" class="btn save">Guardar</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

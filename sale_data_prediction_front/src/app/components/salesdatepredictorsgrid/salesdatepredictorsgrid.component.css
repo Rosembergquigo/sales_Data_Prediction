@@ -7,9 +7,14 @@
     color: red;
 }
 
-.new { color: green}
+.new{ color: green}
 
 #newOrdModal .modal-header{
     color: white;
     background-color: darkseagreen;
 }
+
+.close{ color: green}
+
+.save{ color: green}
+

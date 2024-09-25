@@ -54,4 +54,8 @@ export class SalesService {
       this.listProduct = data as Product[];
     });
   }
+
+  createOrder(createOrder: any): Observable<any>{
+    return this.http.post(this.myApiUrl + "order", createOrder);
+  }
 }

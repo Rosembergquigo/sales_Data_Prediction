@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("sales_data_prediction_back")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19fdf096c7640bf2f01500ee972092d8d524cd9f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59b93ac93bb8dacd7d94bc3121ae1824093519cf")]
 [assembly: System.Reflection.AssemblyProductAttribute("sales_data_prediction_back")]
 [assembly: System.Reflection.AssemblyTitleAttribute("sales_data_prediction_back")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

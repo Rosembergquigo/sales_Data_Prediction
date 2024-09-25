@@ -33,7 +33,7 @@ namespace sales_data_prediction_back.Controllers
 		{
 			CreatedOrderResponseType result = orderService.CreatedOrder(request);
 
-			if(result.returnProccess.Equals("SUCCESS"))
+			if(result.returnProccess.Equals("OK"))
 				return Ok(result);
 			else
 				return BadRequest(result);

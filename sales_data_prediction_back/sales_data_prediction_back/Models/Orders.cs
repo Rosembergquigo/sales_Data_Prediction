@@ -47,14 +47,15 @@ namespace sales_data_prediction_back.Models
 
     public class createOrder
     {
-        public getSalesPrediction Customer { get; set; }
-        public getEmployees Employee { get; set; }
-        public Products Product { set; get; }
-        public Shippers Shipper { set; get; }
+        public getSalesPrediction customer { get; set; }
+        public int idEmployee { get; set; }
+        public int idProduct { set; get; }
+        public int idShipper { set; get; }
         public DateTime OrderDate { set; get; }
         public DateTime RequireDate { set; get; }
         public DateTime ShippedDate { set; get; }
         public decimal Freight { set; get; }
+        public decimal Unitprice { set; get; }
 		public short Qty { get; set; }
 		public decimal Discount { get; set; }
 	}

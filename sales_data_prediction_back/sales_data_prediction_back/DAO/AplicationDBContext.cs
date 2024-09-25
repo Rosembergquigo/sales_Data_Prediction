@@ -64,23 +64,23 @@ namespace sales_data_prediction_back.DAO
 				{
 					//1. Inserción en tabla SALES.ORDERS obteniendo el Order ID
 					string insertOrder = @"INSERT INTO [Sales].[Orders] (custid,empid,orderdate,requireddate,shippeddate,shipperid,freight,shipname,shipaddress,shipcity,shipregion,shippostalcode,shipcountry)
-							VALUES(@custid, @empid, @orderdate, @requireddate, @shippeddate, @shipperid, @freight, @shipname, @shipaddress, @shipcity, @shipregion, @shippostalcode, @shipcountry)";
+							VALUES(@custid, @empid, @orderdate, @requireddate, @shippeddate, @shipperid, @freight, @shipname, @shipaddress, @shipcity, @shipregion, @shippostalcode, @shipcountry); SELECT SCOPE_IDENTITY();";
 					
 					SqlCommand sqlCommand = new SqlCommand(insertOrder, connection, transaction);
 
-					sqlCommand.Parameters.AddWithValue("@custid", order.Customer.id);
-					sqlCommand.Parameters.AddWithValue("@empid", order.Employee.Empid);
+					sqlCommand.Parameters.AddWithValue("@custid", order.customer.id);
+					sqlCommand.Parameters.AddWithValue("@empid", order.idEmployee);
 					sqlCommand.Parameters.AddWithValue("@orderdate", order.OrderDate);
 					sqlCommand.Parameters.AddWithValue("@requireddate", order.RequireDate);
 					sqlCommand.Parameters.AddWithValue("@shippeddate", order.ShippedDate);
-					sqlCommand.Parameters.AddWithValue("@shipperid", order.Shipper.Shipperid);
+					sqlCommand.Parameters.AddWithValue("@shipperid", order.idShipper);
 					sqlCommand.Parameters.AddWithValue("@freight", order.Freight);
-					sqlCommand.Parameters.AddWithValue("@shipname", order.Customer.CustomerName);
-					sqlCommand.Parameters.AddWithValue("@shipaddress", order.Customer.CustomerAddress);
-					sqlCommand.Parameters.AddWithValue("@shipcity", order.Customer.CustomerCity);
-					sqlCommand.Parameters.AddWithValue("@shipregion", order.Customer.CustomerRegion);
-					sqlCommand.Parameters.AddWithValue("@shippostalcode", order.Customer.CustomerZipCode);
-					sqlCommand.Parameters.AddWithValue("@shipcountry", order.Customer.CustomerCountry);
+					sqlCommand.Parameters.AddWithValue("@shipname", order.customer.CustomerName);
+					sqlCommand.Parameters.AddWithValue("@shipaddress", order.customer.CustomerAddress);
+					sqlCommand.Parameters.AddWithValue("@shipcity", order.customer.CustomerCity);
+					sqlCommand.Parameters.AddWithValue("@shipregion", order.customer.CustomerRegion);
+					sqlCommand.Parameters.AddWithValue("@shippostalcode", order.customer.CustomerZipCode);
+					sqlCommand.Parameters.AddWithValue("@shipcountry", order.customer.CustomerCountry);
 
 					int orderId = Convert.ToInt32(sqlCommand.ExecuteScalar());
 
@@ -89,10 +89,12 @@ namespace sales_data_prediction_back.DAO
 
 					SqlCommand sqlCommandDet = new SqlCommand(insertOrdDetail,connection,transaction);
 					sqlCommandDet.Parameters.AddWithValue("@orderid", orderId);
-					sqlCommandDet.Parameters.AddWithValue("@productid", order.Product.Productid);
-					sqlCommandDet.Parameters.AddWithValue("@unitprice", order.Product.Unitprice);
+					sqlCommandDet.Parameters.AddWithValue("@productid", order.idProduct);
+					sqlCommandDet.Parameters.AddWithValue("@unitprice", order.Unitprice);
 					sqlCommandDet.Parameters.AddWithValue("@qty", order.Qty);
 					sqlCommandDet.Parameters.AddWithValue("@discount", order.Discount);
+
+					int orderDet = Convert.ToInt32(sqlCommandDet.ExecuteScalar());
 
 					transaction.Commit();
 
@@ -100,8 +102,9 @@ namespace sales_data_prediction_back.DAO
 				}
 				catch (Exception ex)
 				{
-					return false;
+					Console.WriteLine($"error: {ex}");
 					transaction.Rollback();
+					return false;
 				}
 			}
 		}
